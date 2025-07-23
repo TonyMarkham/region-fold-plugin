@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.tonymarkham.regionfoldplugin</id>
-    <name>region-fold-plugin</name>
+    <name>region-fold</name>
     <vendor email="myonlineentity@gmail.com" url="https://github.com/TonyMarkham">Tony Markham</vendor>
 
     <description><![CDATA[
