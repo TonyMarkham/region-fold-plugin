@@ -132,6 +132,15 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+
+    // Disable both instrumentation tasks due to JDK path issues
+    instrumentCode {
+        enabled = false
+    }
+
+    instrumentTestCode {
+        enabled = false
+    }
 }
 
 intellijPlatformTesting {

@@ -2,4 +2,10 @@
 .idea
 .intellijPlatform
 .qodana
+.kotlin
 build
+out
+*.iml
+*.iws
+.DS_Store
+Thumbs.db

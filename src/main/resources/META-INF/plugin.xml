@@ -1,4 +1,3 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.tonymarkham.regionfoldplugin</id>
     <name>region-fold-plugin</name>
@@ -11,5 +10,56 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.tonymarkham.regionfoldplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="com.github.tonymarkham.regionfoldplugin.startup.MyProjectActivity" />
+        <postStartupActivity implementation="com.github.tonymarkham.regionfoldplugin.settings.SettingsChangeListener" />
+
+        <!-- Region Folding for languages with proper PSI comment support -->
+        <lang.foldingBuilder language="JAVA"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.RegionFoldingBuilder"
+                             order="first"/>
+        <lang.foldingBuilder language="kotlin"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.RegionFoldingBuilder"
+                             order="first"/>
+        <lang.foldingBuilder language="JavaScript"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.RegionFoldingBuilder"
+                             order="first"/>
+        <lang.foldingBuilder language="TypeScript"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.RegionFoldingBuilder"
+                             order="first"/>
+
+        <!-- Region Folding for text-based files and TextMate -->
+        <lang.foldingBuilder language="TEXT"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.UniversalRegionFoldingBuilder"
+                             order="first"/>
+        <lang.foldingBuilder language="PlainText"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.UniversalRegionFoldingBuilder"
+                             order="first"/>
+        <lang.foldingBuilder language="textmate"
+                             implementationClass="com.github.tonymarkham.regionfoldplugin.folding.UniversalRegionFoldingBuilder"
+                             order="first"/>
+
+        <!-- Region Highlighting for languages with proper PSI comment support -->
+        <annotator language="JAVA"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.RegionAnnotator"/>
+        <annotator language="kotlin"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.RegionAnnotator"/>
+        <annotator language="JavaScript"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.RegionAnnotator"/>
+        <annotator language="TypeScript"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.RegionAnnotator"/>
+
+        <!-- Region Highlighting for text-based files and TextMate -->
+        <annotator language="TEXT"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.UniversalRegionAnnotator"/>
+        <annotator language="PlainText"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.UniversalRegionAnnotator"/>
+        <annotator language="textmate"
+                   implementationClass="com.github.tonymarkham.regionfoldplugin.highlighting.UniversalRegionAnnotator"/>
+
+        <!-- Settings -->
+        <applicationConfigurable
+                parentId="editor"
+                instance="com.github.tonymarkham.regionfoldplugin.settings.RegionFoldingConfigurable"
+                id="com.github.tonymarkham.regionfoldplugin.settings.RegionFoldingConfigurable"
+                displayName="Region Folding"/>
     </extensions>
 </idea-plugin>
