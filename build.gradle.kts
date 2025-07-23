@@ -54,6 +54,9 @@ intellijPlatform {
         name = providers.gradleProperty("pluginName")
         version = providers.gradleProperty("pluginVersion")
 
+        // ADD THIS: Ensure proper plugin ID configuration
+        id = providers.gradleProperty("pluginGroup").get()
+
         // Extract the <!-- Plugin description --> section from README.md and provide for the plugin's manifest
         description = providers.fileContents(layout.projectDirectory.file("README.md")).asText.map {
             val start = "<!-- Plugin description -->"
@@ -85,6 +88,7 @@ intellijPlatform {
             untilBuild = providers.gradleProperty("pluginUntilBuild")
         }
     }
+
 
     signing {
         certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
@@ -140,6 +144,26 @@ tasks {
 
     instrumentTestCode {
         enabled = false
+    }
+
+    // FIX: Handle duplicate files properly
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from("src/main/resources/icons") {
+            include("pluginIcon.*")
+            into("META-INF")
+        }
+
+        // Include all other resources normally
+        from("src/main/resources") {
+            include("**/*")
+        }
+    }
+
+    // FIX: Set duplicate strategy for JAR task
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 }
 

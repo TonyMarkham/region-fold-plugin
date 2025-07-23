@@ -1,15 +1,18 @@
 <idea-plugin>
     <id>com.github.tonymarkham.regionfoldplugin</id>
     <name>region-fold-plugin</name>
-    <vendor>tonymarkham</vendor>
+    <vendor email="myonlineentity@gmail.com" url="https://github.com/TonyMarkham">Tony Markham</vendor>
+
+    <description><![CDATA[
+    A powerful code folding plugin for IntelliJ-based IDEs that adds support for region-based code folding with /* #region */ and /* #endregion */ syntax.
+    ]]></description>
+
 
     <depends>com.intellij.modules.platform</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.tonymarkham.regionfoldplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.tonymarkham.regionfoldplugin.startup.MyProjectActivity" />
         <postStartupActivity implementation="com.github.tonymarkham.regionfoldplugin.settings.SettingsChangeListener" />
 
         <!-- Region Folding for languages with proper PSI comment support -->
